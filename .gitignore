@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+
+# Dependencies
+node_modules/
+
+# Build outputs
+client/dist/
+server/bin/
+
+# Database data volume
+pgdata/
+
+# Superpowers
+.superpower
+.superpowers/
+
+# Documentation & Specs
+docs/
