@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useStocks } from './hooks/useStocks.js';
 import { Header } from './components/Header.jsx';
+import { SummaryMetrics } from './components/SummaryMetrics.jsx';
 import { StatusBanner } from './components/StatusBanner.jsx';
 import { MarketFilters } from './components/MarketFilters.jsx';
 import { StockTable } from './components/StockTable.jsx';
@@ -51,9 +52,16 @@ export default function App() {
   };
 
   return (
-    <div style={{ maxWidth: '1080px', margin: '0 auto', padding: '40px 24px 80px' }}>
+    <div
+      style={{
+        maxWidth: '1160px',
+        margin: '0 auto',
+        padding: '36px 20px 80px',
+      }}
+    >
       <Header countdown={countdown} refreshing={refreshing} onRefresh={refresh} />
-      <StatusBanner health={health} lastUpdated={lastUpdated} error={error} onRetry={refresh} />
+      <StatusBanner health={health} error={error} onRetry={refresh} />
+      <SummaryMetrics stocks={stocks} health={health} lastUpdated={lastUpdated} />
       <MarketFilters
         activeMarket={activeMarket}
         onSelectMarket={setActiveMarket}

@@ -15,9 +15,10 @@ server/bin/
 # Database data volume
 pgdata/
 
-# Superpowers
+# Superpowers & Impeccable
 .superpower
 .superpowers/
+.impeccable/
 
 # Documentation & Specs
 docs/
