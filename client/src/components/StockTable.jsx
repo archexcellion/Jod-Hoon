@@ -6,9 +6,12 @@ export function StockTable({ loading, stocks, totalCount, searchQuery, onResetFi
     <div
       style={{
         backgroundColor: 'var(--bg-surface)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
         border: '1px solid var(--border-subtle)',
-        borderRadius: '10px',
+        borderRadius: '12px',
         overflow: 'hidden',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
       }}
     >
       <div style={{ overflowX: 'auto' }}>
@@ -24,69 +27,77 @@ export function StockTable({ loading, stocks, totalCount, searchQuery, onResetFi
             <tr
               style={{
                 borderBottom: '1px solid var(--border-subtle)',
-                backgroundColor: 'rgba(11, 15, 25, 0.4)',
+                backgroundColor: 'rgba(16, 11, 26, 0.85)',
                 color: 'var(--text-secondary)',
-                fontSize: '12px',
+                fontSize: '11px',
                 textTransform: 'uppercase',
-                letterSpacing: '0.04em',
+                letterSpacing: '0.06em',
               }}
             >
-              <th scope="col" style={{ padding: '14px 20px', fontWeight: 600 }}>
+              <th scope="col" style={{ padding: '14px 22px', fontWeight: 700 }}>
                 Asset
               </th>
-              <th scope="col" style={{ padding: '14px 16px', fontWeight: 600 }}>
+              <th scope="col" style={{ padding: '14px 16px', fontWeight: 700 }}>
                 Market
               </th>
-              <th scope="col" style={{ padding: '14px 20px', fontWeight: 600, textAlign: 'right' }}>
+              <th scope="col" style={{ padding: '14px 22px', fontWeight: 700, textAlign: 'right' }}>
                 Latest Price
               </th>
-              <th scope="col" style={{ padding: '14px 20px', fontWeight: 600, textAlign: 'right' }}>
+              <th scope="col" style={{ padding: '14px 22px', fontWeight: 700, textAlign: 'right' }}>
                 24h Change
               </th>
-              <th scope="col" style={{ padding: '14px 20px', fontWeight: 600, textAlign: 'center' }}>
-                Link
+              <th scope="col" style={{ padding: '14px 20px', fontWeight: 700, textAlign: 'center' }}>
+                Source
               </th>
             </tr>
           </thead>
           <tbody key={flashKey} className="flash-update">
             {loading ? (
-              Array.from({ length: 5 }).map((_, idx) => (
+              Array.from({ length: 6 }).map((_, idx) => (
                 <tr key={idx} style={{ borderBottom: '1px solid var(--border-subtle)' }}>
-                  <td style={{ padding: '18px 20px' }}>
+                  <td style={{ padding: '18px 22px' }}>
                     <div style={{ width: '80px', height: '16px', backgroundColor: 'var(--border-subtle)', borderRadius: '4px' }} />
-                    <div style={{ width: '130px', height: '12px', backgroundColor: 'var(--border-subtle)', borderRadius: '4px', marginTop: '6px' }} />
+                    <div style={{ width: '140px', height: '12px', backgroundColor: 'var(--border-subtle)', borderRadius: '4px', marginTop: '6px' }} />
                   </td>
                   <td style={{ padding: '18px 16px' }}>
-                    <div style={{ width: '40px', height: '20px', backgroundColor: 'var(--border-subtle)', borderRadius: '4px' }} />
+                    <div style={{ width: '36px', height: '22px', backgroundColor: 'var(--border-subtle)', borderRadius: '6px' }} />
                   </td>
-                  <td style={{ padding: '18px 20px', textAlign: 'right' }}>
+                  <td style={{ padding: '18px 22px', textAlign: 'right' }}>
                     <div style={{ width: '90px', height: '18px', backgroundColor: 'var(--border-subtle)', borderRadius: '4px', marginLeft: 'auto' }} />
                   </td>
-                  <td style={{ padding: '18px 20px', textAlign: 'right' }}>
-                    <div style={{ width: '65px', height: '22px', backgroundColor: 'var(--border-subtle)', borderRadius: '4px', marginLeft: 'auto' }} />
+                  <td style={{ padding: '18px 22px', textAlign: 'right' }}>
+                    <div style={{ width: '70px', height: '24px', backgroundColor: 'var(--border-subtle)', borderRadius: '6px', marginLeft: 'auto' }} />
                   </td>
                   <td style={{ padding: '18px 20px', textAlign: 'center' }}>
-                    <div style={{ width: '20px', height: '20px', backgroundColor: 'var(--border-subtle)', borderRadius: '4px', margin: '0 auto' }} />
+                    <div style={{ width: '24px', height: '24px', backgroundColor: 'var(--border-subtle)', borderRadius: '6px', margin: '0 auto' }} />
                   </td>
                 </tr>
               ))
             ) : stocks.length === 0 ? (
               <tr>
-                <td colSpan={5} style={{ padding: '48px 20px', textAlign: 'center' }}>
+                <td colSpan={5} style={{ padding: '54px 20px', textAlign: 'center' }}>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '15px' }}>
-                    No matching ticker or company found for "{searchQuery}".
+                    No matching assets found for "{searchQuery}".
                   </p>
                   <button
                     onClick={onResetFilters}
                     style={{
-                      marginTop: '12px',
+                      marginTop: '14px',
                       background: 'transparent',
-                      border: '1px solid var(--border-muted)',
-                      color: 'var(--accent-primary)',
-                      padding: '6px 14px',
-                      borderRadius: '6px',
+                      border: '1px solid var(--border-gold)',
+                      color: 'var(--accent-gold)',
+                      padding: '7px 16px',
+                      borderRadius: '8px',
                       cursor: 'pointer',
                       fontSize: '13px',
+                      fontWeight: 600,
+                      transition: 'background 0.15s',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(234, 179, 8, 0.12)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
                     }}
                   >
                     Reset filters
@@ -100,10 +111,11 @@ export function StockTable({ loading, stocks, totalCount, searchQuery, onResetFi
         </table>
       </div>
 
+      {/* Table Footer */}
       <div
         style={{
-          padding: '12px 20px',
-          backgroundColor: 'rgba(11, 15, 25, 0.4)',
+          padding: '14px 22px',
+          backgroundColor: 'rgba(16, 11, 26, 0.65)',
           borderTop: '1px solid var(--border-subtle)',
           display: 'flex',
           justifyContent: 'space-between',
@@ -114,8 +126,8 @@ export function StockTable({ loading, stocks, totalCount, searchQuery, onResetFi
           gap: '8px',
         }}
       >
-        <span>Showing {stocks.length} of {totalCount} assets</span>
-        <span>Prices update automatically every 60s</span>
+        <span>Displaying {stocks.length} of {totalCount} monitored assets</span>
+        <span>Continuous sync interval: 60s • Delayed 15m for non-realtime markets</span>
       </div>
     </div>
   );
